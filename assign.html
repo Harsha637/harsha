@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+        .li{
+            cursor: pointer;
+        }
+    </style>
+	<script type="text/javascript">
+
+   
+
+		
+
+		function ch(e)
+		 {
+			if(!( e.which >= 97 && e.which <=122 ))
+           {
+                 e.preventDefault(); 
+
+             }
+		}
+		
+		function alph(a)
+		{
+			if(!((a.which >= 97 && a.which <=122) || (a.which >= 65 && a.which <=90)))
+
+			{
+                 a.preventDefault(); 
+			}
+
+		}
+
+		function dr()
+		{
+           var v=document.getElementById("n1").value;
+           var a=75;
+           var r=parseInt(v)*parseInt(a);
+          document.getElementById("n2")=r1
+           document.write(r1);
+		}
+
+		
+
+           
+	</script>
+</head>
+     <body  >
+
+
+           
+
+     
+
+	Enter only Small Case Charectors<input type="text"  onkeypress ="ch(event)"><br>
+
+	Enter only alphabatic Charectors<input type="text"  onkeypress ="alph(event)"><br>
+
+
+
+
+<table border="1" cellpadding="20" class="li" >
+      	<tr>
+      		<th>Roll no</th><th>Name</th><th>College Name</th><th>Marks</th><th>Sem</th>
+      	</tr>
+      	 <tr>
+      		<td>1</td><th>Virat</td><td>IIT</td><td>100</td><td>8</td>
+      	</tr>
+      	<tr  >
+      		<td >2</td><td colspan="2">Sikhar</td><td rowspan="2" >IIT</td><td>90</td><td>6</td>
+      	</tr>
+      	<tr>
+      		<td>3</td><td>rohit</td><td>IIT</td><td>90</td><td>6</td>
+      	</tr>
+      	<tr>
+      		<td>4</td><td>Rahul</td><td>JNu</td><td>80</td><td>4</td>
+      	</tr>
+      	<tr>
+      		<td>5</td><td>dhoni</td><td>NIT</td><td>90</td><td>6</td>
+      	</tr>
+      	<tr>
+      		<td>6</td><td>Hardik</td><td>IIM</td><td>90</td><td>8</td>
+      	</tr><br><br>
+      	</table>
+      <div>
+	 
+
+      
+</body>
+</html>
