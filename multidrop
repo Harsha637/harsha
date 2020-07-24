@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		types=["continent","country","state"];
+		function filldd()
+		{
+          var typeDD=document.('type');getElementById
+          for (var i = 0; i < types.length; i++) {
+           var ele=document.createElement('option');
+           ele.text=types[i];
+           typeDD.add(ele,i+1);
+          }
+          data=[['asia','africa'],['india','egypt','zaire'],['Ap','namibia','congo']];
+		}
+		function fillData()
+		{
+			var typeDDN=document.getElementById('dd');
+			dataDD.innerText=null;
+			for (var i = 0; i < data[selectedidx-1].length; i++) {
+				ele.text=data[selectedidx-1][i]
+				dataDD.add(ele,i+1)
+			}
+		}
+
+
+	</script>
+</head>
+<body id="type" onchange="fillData()">
+	<select id="type">
+		<option>select</option>
+	</select>
+	<select id="dd">
+		<option>select</option>
+	</select>
+
+</body>
+</html>

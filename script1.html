@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		
+var a=10;
+console.log(a);
+function run() 
+{
+     alert("haii"); 
+     var a= document.getElementById('mytxt').value;
+      alert(a);      
+}
+function walk()
+ {
+	console.log("walking")
+}
+cities=['hyderabad','chennai','New York'];
+
+for (let i = 0; i < cities.length; i++)
+ {
+	console.log(cities[i]);
+}
+
+ function act(e) 
+    {
+	if(!( e.which >= 90 && e.which <=122 ))
+     {
+     e.preventDefault(); 
+
+     }
+     if(( e.which >= 35 && e.which <=40 ) ||(e.which== 64))
+     {
+     	console.log(e.which);
+     }
+
+}
+var i=20;
+console.log(i);
+
+
+	</script>
+</head>
+<body onload="run()"> 
+    <p>This is first program</p>
+    <input type="submit" onclick ="walk()">
+    
+    <input type="mail" id="mytxt" onkeypress ="act(event)">
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+
+function filldd(args) {
+
+
+fruits=['apple','Mango','Banana'];
+
+   var dropdwn=document.getElementById('dd');
+
+for(i=0;i<fruits.length;i++)
+{
+ var ele=document.createElement('option');
+ ele.text=fruits[i];
+dropdwn.add(ele,i+1)
+console.log('fruit: '+args);
+}
+}
+</script>
+
+</head>
+
+<body onload="filldd()">
+<select id="dd">
+<option>select fruits</option>
+
+</select>
+
+</body>
+
+</html>
