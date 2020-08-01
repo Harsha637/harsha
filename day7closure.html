@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		
+		 countfun=(function count()
+		{
+			var ctr=0;
+			return function()
+			{
+				return ++ctr;
+			}
+            
+		})();
+		function dislike()
+		{
+			ctr=10;
+		}
+	</script>
+</head>
+<body>
+    <input type="submit" value="like" onclick="alert(countfun())">
+    <input type="submit" value="dislike" onclick="dislike()">
+</body>
+</html>
