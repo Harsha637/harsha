@@ -1,0 +1,193 @@
+
+SQL*Plus: Release 11.2.0.1.0 Production on Thu Jul 30 10:55:13 2020
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: conn /as sysdba
+Enter password:
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> conn dscfs
+Enter password:
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+SQL> conn dxcfs
+Enter password:
+Connected.
+SQL> create table school(
+  2  id_no int,
+  3  name varchar(20)
+  4  );
+
+Table created.
+
+SQL> insert into school values('637','harsha');
+
+1 row created.
+
+SQL> insert into school values('675','kumar');
+
+1 row created.
+
+SQL> insert into school values('876','ramu');
+
+1 row created.
+
+SQL> insert into school values('262','raju');
+
+1 row created.
+
+SQL> delete from school
+  2  where name='harsha';
+
+1 row deleted.
+
+SQL> select *from school;
+
+     ID_NO NAME
+---------- --------------------
+       675 kumar
+       876 ramu
+       262 raju
+
+SQL> commit;
+
+Commit complete.
+
+SQL> delete from school;
+
+3 rows deleted.
+
+SQL> select *from school;
+
+no rows selected
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select *from school;
+
+     ID_NO NAME
+---------- --------------------
+       675 kumar
+       876 ramu
+       262 raju
+
+SQL> truncate table school;
+
+Table truncated.
+
+SQL> select *from school;
+
+no rows selected
+
+SQL> drop table school;
+
+Table dropped.
+
+SQL> create table parent(
+  2  uname varchar(20) primary key;
+uname varchar(20) primary key
+                            *
+ERROR at line 2:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table parent(
+  2  uname varchar(20) primary key,
+  3  pass varchar(20)
+  4  );
+
+Table created.
+
+SQL> create table child
+  2  (
+  3  uname varchar(20) references parent(uname),
+  4  pass varchar(20)
+  5  );
+
+Table created.
+
+SQL> insert into parent values('raj','sad');
+
+1 row created.
+
+SQL> insert into parent values('raj','sad');
+insert into parent values('raj','sad')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (DXCFS.SYS_C0011085) violated
+
+
+SQL> insert into parent values('ram','sad');
+
+1 row created.
+
+SQL> insert into child values('raj','sad');
+
+1 row created.
+
+SQL> insert into child values('raj','sad');
+
+1 row created.
+
+SQL> select * from parent;
+
+UNAME                PASS
+-------------------- --------------------
+raj                  sad
+ram                  sad
+
+SQL> select * from child;
+
+UNAME                PASS
+-------------------- --------------------
+raj                  sad
+raj                  sad
+
+SQL> delete from child;
+
+2 rows deleted.
+
+SQL> delete from parent;
+
+2 rows deleted.
+
+SQL> insert into parent values('raj','sad');
+
+1 row created.
+
+SQL> insert into parent values('ram','sad');
+
+1 row created.
+
+SQL> select * from parent;
+
+UNAME                PASS
+-------------------- --------------------
+raj                  sad
+ram                  sad
+
+SQL> select * from child;
+
+no rows selected
+
+SQL> truncate table parent;
+truncate table parent
+               *
+ERROR at line 1:
+ORA-02266: unique/primary keys in table referenced by enabled foreign keys
+
+
+SQL> delete from parent;
+
+2 rows deleted.
+
+SQL>

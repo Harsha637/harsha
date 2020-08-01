@@ -1,0 +1,15 @@
+create table employee3(
+  empFname varchar(20),
+  empMname varchar(20),
+  empLname varchar(20),
+  empAge int check(empAge between 1 and 50),
+  empCity varchar(20) check(empCity like 'B%'),
+  empDesig varchar(20),
+  empId varchar(5),
+  empdob date,
+  constraint chk check(length(empId)=5));
+
+insert into employee1 values('harsha','kumar','Nomula','22','Bangalore','Associate','em123','23-jan-1999');
+
+
+

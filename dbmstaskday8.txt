@@ -1,0 +1,91 @@
+SQL> create table stock(sno int primary key,iname varchar(20),price varchar(10));
+
+Table created.
+
+SQL> insert into stock values('1001','lenovo','10000');
+
+1 row created.
+
+SQL> insert into stock values('1002','one plus','37000');
+
+1 row created.
+
+SQL> insert into stock values('1003','Moto','15000');
+
+1 row created.
+
+SQL> insert into stock values('1004','honor','13000');
+
+1 row created.
+
+SQL> insert into stock values('1005','iphone','70000');
+
+1 row created.
+
+SQL> insert into stock values('1006','redmi','7000');
+
+1 row created.
+
+SQL> select *from stock;
+
+       SNO INAME                PRICE
+---------- -------------------- ----------
+      1001 lenovo               10000
+      1002 one plus             37000
+      1003 Moto                 15000
+      1004 honor                13000
+      1005 iphone               70000
+      1006 redmi                7000
+
+6 rows selected.
+
+SQL> create table sales(sno int,pname varchar(20),sname varchar(20) references stock(sname));
+create table sales(sno int,pname varchar(20),sname varchar(20) references stock(sname))
+                                                                                *
+ERROR at line 1:
+ORA-00904: "SNAME": invalid identifier
+
+
+SQL> create table sales(sno int,pname varchar(20),snum int references stock(snum));
+create table sales(sno int,pname varchar(20),snum int references stock(snum))
+                                                                       *
+ERROR at line 1:
+ORA-00904: "SNUM": invalid identifier
+
+
+SQL> create table sales(sno int,pname varchar(20),sno int references stock(sno));
+create table sales(sno int,pname varchar(20),sno int references stock(sno))
+                                             *
+ERROR at line 1:
+ORA-00957: duplicate column name
+
+
+SQL> create table sales(snum int,pname varchar(20),sno int references stock(sno));
+
+Table created.
+
+SQL> insert into sales values(1,'harsha','1006');
+
+1 row created.
+
+SQL> insert into sales values(2,'kumar','1003');
+
+1 row created.
+
+SQL> insert into sales values(3,'nomula','1002');
+
+1 row created.
+
+SQL> insert into sales values(4,'ramu','1001');
+
+1 row created.
+
+SQL> select *from sales
+  2  ;
+
+      SNUM PNAME                       SNO
+---------- -------------------- ----------
+         1 harsha                     1006
+         2 kumar                      1003
+         3 nomula                     1002
+         4 ramu                       1001

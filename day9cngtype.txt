@@ -1,0 +1,168 @@
+
+SQL> create table test(
+  2  user_id int,
+  3  u_name varchar(20),
+  4  constraint co primary key(user_id)
+  5  );
+
+Table created.
+
+SQL> insert into test values('1','harsha');
+
+1 row created.
+
+SQL> insert into test values('1','harsha');
+insert into test values('1','harsha')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (DXCFS.CO) violated
+
+
+SQL> alter table drop constraint co;
+alter table drop constraint co
+            *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> alter table test drop constraint co;
+
+Table altered.
+
+SQL> create table colconst
+  2  (
+  3  user_id int primary key,
+  4  uname varchar(20)
+  5  );
+
+Table created.
+
+SQL> insert into colconst values(1,'dd');
+
+1 row created.
+
+SQL> insert into colconst values(1,'dd');
+insert into colconst values(1,'dd')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (DXCFS.SYS_C0011084) violated
+
+
+SQL> desc user_constraints;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ OWNER                                              VARCHAR2(30)
+ CONSTRAINT_NAME                           NOT NULL VARCHAR2(30)
+ CONSTRAINT_TYPE                                    VARCHAR2(1)
+ TABLE_NAME                                NOT NULL VARCHAR2(30)
+ SEARCH_CONDITION                                   LONG
+ R_OWNER                                            VARCHAR2(30)
+ R_CONSTRAINT_NAME                                  VARCHAR2(30)
+ DELETE_RULE                                        VARCHAR2(9)
+ STATUS                                             VARCHAR2(8)
+ DEFERRABLE                                         VARCHAR2(14)
+ DEFERRED                                           VARCHAR2(9)
+ VALIDATED                                          VARCHAR2(13)
+ GENERATED                                          VARCHAR2(14)
+ BAD                                                VARCHAR2(3)
+ RELY                                               VARCHAR2(4)
+ LAST_CHANGE                                        DATE
+ INDEX_OWNER                                        VARCHAR2(30)
+ INDEX_NAME                                         VARCHAR2(30)
+ INVALID                                            VARCHAR2(7)
+ VIEW_RELATED                                       VARCHAR2(14)
+
+SQL> select constraint_name,constraint_type,table_name
+  2  from user_constraints;
+
+CONSTRAINT_NAME                C TABLE_NAME
+------------------------------ - ------------------------------
+SYS_C0011053                   P CLG
+SYS_C0011068                   C EMPLOYEE
+SYS_C0011056                   P STUD
+SYS_C0011057                   R STUD
+BIN$mtAbGc3dTG+aDILPYx5Lfg==$0 P BIN$QM4AaGRDQJe/puLYbtxh5Q==$0
+SYS_C0011059                   P STOCK
+SYS_C0011060                   R SALES
+BIN$ELzehEcoSwSphXVAgFJ09g==$0 P BIN$RP0uixTvQR6qLkQ8CWIKHw==$0
+SYS_C0011062                   P STOCK1
+SYS_C0011063                   R SALES1
+SYS_C0011064                   C CUSTOMER
+
+CONSTRAINT_NAME                C TABLE_NAME
+------------------------------ - ------------------------------
+SYS_C0011065                   P CUSTOMER
+SYS_C0011066                   C CUSTOMER1
+SYS_C0011067                   P CUSTOMER1
+SYS_C0011084                   P COLCONST
+BIN$/H7ws/ZVTgmX6WWS3BDAOQ==$0 U BIN$VV+Y+OcqT1GVYK+Mf7ZLSw==$0
+BIN$taoP1QuRS5CeaYDEjGSDxQ==$0 U BIN$oZDK3AkXSYmk+RZjIT5c9A==$0
+BIN$SfratELwTU+b0Vg24020kQ==$0 U BIN$oZDK3AkXSYmk+RZjIT5c9A==$0
+BIN$++m45QFHS4SzK5QQXXktpg==$0 U BIN$oZDK3AkXSYmk+RZjIT5c9A==$0
+BIN$E9BxWBhZQk6B1NuYXvgHxA==$0 U BIN$DVRdAGwTQ1GyWdpxAneIsg==$0
+BIN$RQmJ0tcIRsep4I5pGwOgoQ==$0 U BIN$DVRdAGwTQ1GyWdpxAneIsg==$0
+BIN$zmanTF7tTx2kpv8292Jv5g==$0 U BIN$DVRdAGwTQ1GyWdpxAneIsg==$0
+
+CONSTRAINT_NAME                C TABLE_NAME
+------------------------------ - ------------------------------
+BIN$Rx9+XMgQQ0GFE6017s2ZlQ==$0 U BIN$jssVfY+MSu+qn/rTdLYZcA==$0
+BIN$8EfT//TQRVajdLS1au8c6A==$0 U BIN$jssVfY+MSu+qn/rTdLYZcA==$0
+CON                            U TIMETABLE
+CON1                           U TIMETABLE
+CON2                           U TIMETABLE
+
+27 rows selected.
+
+SQL> select constraint_name,constraint_type,table_name
+  2  from user_constraints
+  3  where table_name='colconst';
+
+no rows selected
+
+SQL> select constraint_name,constraint_type,table_name
+  2  where table_name='COLCONST';
+where table_name='COLCONST'
+*
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select constraint_name,constraint_type,table_name
+  2  from user_constraints
+  3  where table_name='COLCONST';
+
+CONSTRAINT_NAME                C TABLE_NAME
+------------------------------ - ------------------------------
+SYS_C0011084                   P COLCONST
+
+SQL> alter table colconst
+  2  drop constraint SYS_C0011084;
+
+Table altered.
+
+SQL> create table changetype
+  2  (
+  3  uname varchar(20),
+  4  pass varchar(20)
+  5  );
+
+Table created.
+
+SQL> alter table changeType
+  2  modify pass int;
+
+Table altered.
+
+SQL> insert into changetype values('aaa','1');
+
+1 row created.
+
+SQL> alter table changeType
+  2  modify pass varchar(20);
+modify pass varchar(20)
+       *
+ERROR at line 2:
+ORA-01439: column to be modified must be empty to change datatype
+
+
+SQL>

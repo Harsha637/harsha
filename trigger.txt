@@ -1,0 +1,131 @@
+
+SQL*Plus: Release 11.2.0.1.0 Production on Thu Jul 30 12:57:46 2020
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: conn /as sysdba
+Enter password:
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> conn dxcfs
+Enter password:
+Connected.
+SQL> create table cust(
+  2  cid int,
+  3  cname varchar(20));
+
+Table created.
+
+SQL> create table backup1(
+  2  cid int,
+  3  cname varchar(20));
+
+Table created.
+
+SQL> create trigger trigg
+  2  after insert
+  3  on cust
+  4  for each row
+  5  begin
+  6  insert into backup1 values(old.cid,old.cname);
+  7  end;
+  8  /
+
+Warning: Trigger created with compilation errors.
+
+SQL> insert into cust1 values('1','harsha');
+insert into cust1 values('1','harsha')
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> insert into cust values('1','harsha');
+insert into cust values('1','harsha')
+            *
+ERROR at line 1:
+ORA-04098: trigger 'DXCFS.TRIGG' is invalid and failed re-validation
+
+
+SQL> drop trigger trgg;
+drop trigger trgg
+*
+ERROR at line 1:
+ORA-04080: trigger 'TRGG' does not exist
+
+
+SQL> drop trigger trigg;
+
+Trigger dropped.
+
+SQL> create trigger trigg
+  2  after insert
+  3  on cust
+  4  for each row
+  5  begin
+  6  insert into backup1 values(:old.cid,:old.cname);
+  7  end;
+  8  /
+
+Trigger created.
+
+SQL> insert into cust values('1','harsha');
+
+1 row created.
+
+SQL> insert into cust values('2','harsha');
+
+1 row created.
+
+SQL> select *from backup1;
+
+       CID CNAME
+---------- --------------------
+
+
+
+SQL> select *from cust;
+
+       CID CNAME
+---------- --------------------
+         1 harsha
+         2 harsha
+
+SQL> select *from backup1;
+
+       CID CNAME
+---------- --------------------
+
+
+
+SQL> drop trigger trigg;
+
+Trigger dropped.
+
+SQL> create trigger trigg
+  2  after insert
+  3  on cust
+  4  for each row
+  5  begin
+  6  insert into backup1(cid,cname)values(:new.cid,:new.cname);
+  7  end;
+  8  /
+
+Trigger created.
+
+SQL> insert into cust values('1','ramu');
+
+1 row created.
+
+SQL> select *from backup1;
+
+       CID CNAME
+---------- --------------------
+
+
+         1 ramu
+
+SQL>

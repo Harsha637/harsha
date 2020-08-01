@@ -1,0 +1,69 @@
+create table stud1
+(
+stud_id int primary key,
+clg_id int,
+gender varchar(6),
+sem int,
+marks int
+)
+
+alter table stud1
+add sname varchar(20);
+
+insert into stud1 values('101','121','male','1','67','Rohit');
+insert into stud1 values('102','121','male','3','67','Rahul');
+insert into stud1 values('103','121','female','1','67','rajeshwari');
+insert into stud1 values('104','121','male','5','67','Virat');
+
+
+insert into stud1 values('105','122','male','5','67','Dawan');
+insert into stud1 values('106','122','female','3','67','smrithi');
+insert into stud1 values('107','122','female','1','67','harampreet');
+insert into stud1 values('108','122','male','5','67','DK');
+
+
+insert into stud1 values('109','123','male','5','67','Dhoni');
+insert into stud1 values('110','123','male','5','67','Hardik');
+insert into stud1 values('111','123','female','3','67','Shifali');
+insert into stud1 values('112','123','male','3','67','Jadeja');
+insert into stud1 values('113','123','male','3','67','kuldeep');
+
+
+
+select count(sem),sem
+  2  from stud1
+  3  group by sem
+  4  order by count(sem);
+
+COUNT(SEM)        SEM
+---------- ----------
+         3          1
+         5          3
+         5          5
+
+
+
+
+select count(sname) , sem
+from stud1
+group by sem;
+
+
+select count(sname) , sem , clg_id
+from stud1
+group by sem,clg_id;
+
+select count(sname) , sem , clg_id
+from stud1
+group by  rollup(sem,clg_id);
+
+
+
+
+select count(sname) , sem , clg_id
+from stud1
+group by  rollup(clg_id,sem);
+
+select count(sname) , sem , clg_id
+from stud1
+group by  cube(clg_id,sem);

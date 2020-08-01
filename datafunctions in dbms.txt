@@ -1,0 +1,41 @@
+ SELECT
+  2      TO_CHAR(SYSDATE, 'MM-DD-YYYY HH24:MI:SS')
+  3  FROM
+  4      dual;
+
+TO_CHAR(SYSDATE,'MM
+-------------------
+07-28-2020 14:44:12
+
+SQL> SELECT
+  2      TO_CHAR(SYSDATE, 'MM-DD-YYYY HH24:MI:SS')
+  3  FROM
+  4    dual;
+
+TO_CHAR(SYSDATE,'MM
+-------------------
+07-28-2020 14:46:56
+
+SQL> SELECT
+  2      TO_CHAR(SYSDATE, 'MM-DD-YYYY')
+  3  FROM
+  4    dual;
+
+TO_CHAR(SY
+----------
+07-28-2020
+
+SQL> select To_char(sysdate,'DL')
+  2  from
+  3   dual;
+
+TO_CHAR(SYSDATE,'DL')
+-----------------------------
+Tuesday, July 28, 2020
+
+SQL> select to_char(sysdate+10,'dd-mm-yyyy')
+  2  from dual;
+
+TO_CHAR(SY
+----------
+07-08-2020

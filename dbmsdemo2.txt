@@ -1,0 +1,222 @@
+
+SQL> create table sales1
+  2  (itemId varchar(20) references stock(itemId),
+  3  salesDate date);
+(itemId varchar(20) references stock(itemId),
+                                     *
+ERROR at line 2:
+ORA-00904: "ITEMID": invalid identifier
+
+
+SQL> create table sales1
+  2  (itemId varchar(20) references stock1(itemId),
+  3  salesDate date);
+(itemId varchar(20) references stock1(itemId),
+ *
+ERROR at line 2:
+ORA-02267: column type incompatible with referenced column type
+
+
+SQL> create table sales1
+  2  (itemId varchar(20) references stock1(itemId),
+  3  salesDate date);
+(itemId varchar(20) references stock1(itemId),
+ *
+ERROR at line 2:
+ORA-02267: column type incompatible with referenced column type
+
+
+SQL> drop table stock1
+  2  ;
+
+Table dropped.
+
+SQL> create table stock1
+  2  (
+  3  itemId int primary key,
+  4  itemName varchar(20)
+  5  );
+
+Table created.
+
+SQL> create table sales(itemId int references stock1(itemId),date1 date);
+create table sales(itemId int references stock1(itemId),date1 date)
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> create table sales1(itemId int references stock1(itemId),date1 date);
+
+Table created.
+
+SQL> insert into sales values(null,to_date('01-01-2020','dd-mm-yyyy'));
+insert into sales values(null,to_date('01-01-2020','dd-mm-yyyy'))
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> insert into sales1 values(null,to_date('01-01-2020','dd-mm-yyyy'));
+
+1 row created.
+
+SQL> select *from sales1;
+
+    ITEMID DATE1
+---------- ---------
+           01-JAN-20
+
+SQL> create table customer
+  2  (
+  3  cust_id int primary key,
+  4  cust_name varchar(20),
+  5  contact_no int not null
+  6  );
+
+Table created.
+
+SQL> insert into customer values(20,null,null);
+insert into customer values(20,null,null)
+                                    *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("DXCFS"."CUSTOMER"."CONTACT_NO")
+
+
+SQL> insert into customer values(20,null,'987');
+
+1 row created.
+
+SQL> create table customer1
+  2  (
+  3  cust_id int primary key,
+  4  cust_name varchar(20),
+  5  contact_no int not null,
+  6  address varchar(50),
+  7  ref_id varchar(50),
+  8  cust_area varchar(20)
+  9  );
+
+Table created.
+
+SQL> insert into customer1 values(60,null,998877,null,null,null);
+
+1 row created.
+
+SQL> insert into customer1(cust_id,contact_no)
+  2  values(40,55555);
+
+1 row created.
+
+SQL> insert into customer1(cust_id,contact_no,cust_name)
+  2  values(30,6666,'RAJ');
+
+1 row created.
+
+SQL> insert into customer1(cust_id,cust_name)
+  2  values(3,'RAM');
+insert into customer1(cust_id,cust_name)
+*
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("DXCFS"."CUSTOMER1"."CONTACT_NO")
+
+
+SQL> insert into customer1 values(cust_id,cust_name)
+  2  ;
+insert into customer1 values(cust_id,cust_name)
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> insert into customer1 values(cust_id,cust_name)
+  2  values(3,'RAM');
+values(3,'RAM')
+*
+ERROR at line 2:
+ORA-00933: SQL command not properly ended
+
+
+SQL> insert into customer1 values(cust_id,cust_name)
+  2  values(3,'RAM');
+values(3,'RAM')
+*
+ERROR at line 2:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from customer1;
+
+   CUST_ID CUST_NAME            CONTACT_NO
+---------- -------------------- ----------
+ADDRESS
+--------------------------------------------------
+REF_ID                                             CUST_AREA
+-------------------------------------------------- --------------------
+        60                          998877
+
+
+
+        40                           55555
+
+
+
+   CUST_ID CUST_NAME            CONTACT_NO
+---------- -------------------- ----------
+ADDRESS
+--------------------------------------------------
+REF_ID                                             CUST_AREA
+-------------------------------------------------- --------------------
+
+        30 RAJ                        6666
+
+
+
+
+SQL> select * from customer1
+  2  where cust_name is not null;
+
+   CUST_ID CUST_NAME            CONTACT_NO
+---------- -------------------- ----------
+ADDRESS
+--------------------------------------------------
+REF_ID                                             CUST_AREA
+-------------------------------------------------- --------------------
+        30 RAJ                        6666
+
+
+
+
+SQL> select cust_name,cust_id
+  2  from customer1
+  3  where cust_id  > 35;
+
+CUST_NAME               CUST_ID
+-------------------- ----------
+                             60
+                             40
+
+SQL> select contact_no,cust_id
+  2  from customer1
+  3  where cust_id  > 35;
+
+CONTACT_NO    CUST_ID
+---------- ----------
+    998877         60
+     55555         40
+
+SQL> select * from customer1
+  2  where cust_id=30;
+
+   CUST_ID CUST_NAME            CONTACT_NO
+---------- -------------------- ----------
+ADDRESS
+--------------------------------------------------
+REF_ID                                             CUST_AREA
+-------------------------------------------------- --------------------
+        30 RAJ                        6666
+
+
+
+
+SQL>

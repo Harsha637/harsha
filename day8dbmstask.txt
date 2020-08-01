@@ -1,0 +1,50 @@
+
+SQL> create table timetable(day varchar(10),sess int,room varchar(5),facalty varchar(20),sem int,sub varchar(20),constraint con unique(day,sess,sem),constraint con1 unique(day,sess,room),constraint con2 unique(day,sess,room,facalty,sem));
+
+Table created.
+
+SQL> insert into timetable values('mon','1','r1','raju','1','java');
+
+1 row created.
+
+SQL> insert into timetable values('mon','1','r2','ram','1','java');
+insert into timetable values('mon','1','r2','ram','1','java')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (DXCFS.CON) violated
+
+
+SQL> insert into timetable values('mon','1','r2','ram','3','java');
+
+1 row created.
+
+SQL> insert into timetable values('mon','1','r2','ram','1','jee');
+insert into timetable values('mon','1','r2','ram','1','jee')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (DXCFS.CON) violated
+
+
+SQL> insert into timetable values('mon','1','r1','john','1','dbms');
+insert into timetable values('mon','1','r1','john','1','dbms')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (DXCFS.CON) violated
+
+
+SQL> insert into timetable values('mon','2','r1','john','5','dbms');
+
+1 row created.
+
+SQL> insert into timetable values('tue','2','r1','john','5','dbms');
+
+1 row created.
+
+SQL> select *from timetable;
+
+DAY              SESS ROOM  FACALTY                     SEM SUB
+---------- ---------- ----- -------------------- ---------- --------------------
+mon                 1 r1    raju                          1 java
+mon                 1 r2    ram                           3 java
+mon                 2 r1    john                          5 dbms
+tue                 2 r1    john                          5 dbms
