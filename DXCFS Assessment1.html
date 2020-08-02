@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+	body 
+	{
+  background-image: url('prac.jfif');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+    }
+</style>
+	<script type="text/javascript">
+		function check() 
+		{
+			var a=document.getElementById('p1');
+			var b=document.getElementById('p2');
+			if(a!=b)
+			{
+				alert('password not matched');
+			}
+
+
+		}
+		function uname(e) 
+		{
+			
+            if(!(( e.which >= 65 && e.which <=90 ) || ( e.which >= 97 && e.which <=122 )))
+               {
+                 e.preventDefault(); 
+             }
+
+
+		}
+		function dob()
+		{
+			var c=document.getElementById('d').value;
+			if(c<20)
+			{
+				alert('invalid date');
+			}
+		}
+		
+		</script>
+    </head>
+          <body>
+
+  <center>
+ <div>
+ 	<table border="2"  bgcolor="grey" cellpadding="10" bordercolor="grey" >
+
+     <form action="task.html">
+     	<tr><th colspan="2"><h4>New Account User?</h4></th></tr><br>
+     	
+     	<tr>
+     		
+        <td>  
+       Enter Name <input type="text" placeholder="name" value ='name'onkeypress ="uname(event)" ><br><br>
+       password <input type="password"  placeholder="password" id='p1' required><br><br> 
+           
+
+           
+           confirm password:<input type="password"  placeholder="confirm" id='p2' required><br><br>
+
+           Education <select required>
+           	<option>select one</option>
+           <option>graduation</option>
+           <option>post graduation</option>
+           	
+           </select><br><br>
+       
+             course <select required>
+           	<option>select one</option>
+           	<option>Computer science</option>
+           	<option>Electronics and communication</option>
+           	<option>Bachelor of arts </option>
+             <option>M-TECH</option>
+           	<option>Master of arts</option>
+           	<option>MBA </option>
+           </select><br><br>
+       
+           
+           
+           Date of birth<input type="date" id="d" min="1998-01-01" alt="invalid" onclick="dob()" required><br><br>
+          
+         <input type="submit" value="register" onclick="check()" style="background-color: green"><br><br>
+             </td>
+
+       </tr>
+     </form>
+
+    </table>
+     </div>
+   </center>
+  
+</body>
+</html>
